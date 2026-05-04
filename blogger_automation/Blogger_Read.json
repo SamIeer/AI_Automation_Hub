@@ -1,0 +1,490 @@
+{
+  "name": "Blogger_Read",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 19
+            },
+            {
+              "field": "cronExpression"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        16
+      ],
+      "id": "bcfaabfb-1567-4f3a-b548-e9249e03876d",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://www.kdnuggets.com/feed",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        288,
+        -128
+      ],
+      "id": "45431e67-e5e9-4b96-baa6-f52b13b16f95",
+      "name": "RSS KDnuggets"
+    },
+    {
+      "parameters": {
+        "url": "https://towardsdatascience.com/feed",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        288,
+        16
+      ],
+      "id": "bc55a1e3-c473-4ffa-9c7a-44f5e505b2f9",
+      "name": "RSS Dev.to"
+    },
+    {
+      "parameters": {
+        "url": "https://dev.to/feed",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        288,
+        176
+      ],
+      "id": "6e65c7c0-8924-422d-86fa-3226c47245ec",
+      "name": "RSS Medium"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -48
+      ],
+      "id": "6576c3ed-7f13-467e-a86d-db482d709847",
+      "name": "Limit"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        544,
+        64
+      ],
+      "id": "ca0cb6cb-82b3-45c8-ac23-234fec611fa7",
+      "name": "Limit1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        560,
+        192
+      ],
+      "id": "008e9fe9-1a1b-4fba-87bf-5f77571301aa",
+      "name": "Limit2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ae6acda4-a38d-494b-9fb3-8703dce83efa",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "4fb06456-41de-4562-bfef-9b8f64fa7ecc",
+              "name": "link",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "3a624b05-3ae3-47d3-b496-b0484852f657",
+              "name": "description",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "8998aca3-a8f7-4cd9-b9b0-7a92cea9baa7",
+              "name": "source",
+              "value": "https://dev.to/feed",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        784,
+        -16
+      ],
+      "id": "b39d6b00-2a09-44e3-b9fd-168b248cac77",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "96b187a0-ed82-46be-b008-f0380b7f005e",
+              "name": "title",
+              "value": "={{ $json.title}}",
+              "type": "string"
+            },
+            {
+              "id": "12a8ca29-1609-44b3-82c8-3eb65ddb2b93",
+              "name": "link",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "c250fb16-b387-429e-bda9-9025380d7620",
+              "name": "description",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "b96da57f-9cc2-4d3b-9c0d-7febdb3c8e4e",
+              "name": "source",
+              "value": "https://towardsdatascience.com/feed",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        816,
+        112
+      ],
+      "id": "b8131d1a-1bad-44d6-8f5f-f07a0fe3f164",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1ffbb754-1a01-4019-9d71-fc7adfe9648c",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "1646240c-089e-4874-b5ab-c7c5139a8661",
+              "name": "link",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "cd8c3d22-774f-48b8-bdac-87aa275509cb",
+              "name": "description",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "43b99576-260c-435c-80eb-74065baff3d9",
+              "name": "source",
+              "value": "https://www.kdnuggets.com/feed",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        784,
+        256
+      ],
+      "id": "d32a763a-94bf-4362-b054-a9147e53f02c",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1088,
+        80
+      ],
+      "id": "12149470-1e1d-4d09-8eab-350b04bdd794",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        144
+      ],
+      "id": "61f6c6e8-0cec-48b3-b870-5e1c8b846d6e",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "maxItems": 2
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1504,
+        144
+      ],
+      "id": "4223ea9d-acf1-48ea-8c40-82aa1b2eb349",
+      "name": "Limit3"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "3404a57d-d7d8-80f8-93cb-ddaf6039dd18",
+          "mode": "list",
+          "cachedResultName": "Blog_Reader",
+          "cachedResultUrl": "https://www.notion.so/3404a57dd7d880f893cbddaf6039dd18"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Name|title",
+              "title": "={{ $json.title }}"
+            },
+            {
+              "key": "URL |url",
+              "urlValue": "={{ $json.link }}"
+            },
+            {
+              "key": "Source |rich_text",
+              "textContent": "={{ $json.source }}"
+            },
+            {
+              "key": "Summary |rich_text",
+              "textContent": "={{ $json.description ? $json.description.slice(0, 1800) + '...' : '' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1712,
+        144
+      ],
+      "id": "77e617d8-7dae-4077-b53e-f355f2e57ad7",
+      "name": "Get a database page",
+      "credentials": {
+        "notionApi": {
+          "id": "RW5EZHmVJESeVsd3",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        992,
+        416
+      ],
+      "typeVersion": 1,
+      "id": "f29227e9-8989-4a0a-a229-22681295d419",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "RSS KDnuggets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS Dev.to",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS Medium",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS KDnuggets": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Dev.to": {
+      "main": [
+        [
+          {
+            "node": "Limit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Medium": {
+      "main": [
+        [
+          {
+            "node": "Limit2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Limit3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit3": {
+      "main": [
+        [
+          {
+            "node": "Get a database page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "d3391feb-7fe3-47a6-b0be-fc054371e7b5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "54adcccebf752c5960d7a5e11677224f9d42aae64d7796603a0cfdf604b5fbc1"
+  },
+  "id": "Q1SPn9Dv-lK-UzgzTQGNC",
+  "tags": []
+}
